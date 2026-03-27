@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Solana Nexus
 
-## Getting Started
+**A Unified Utility Framework for the Token-2022 Era**
 
-First, run the development server:
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-15+-black.svg)](https://nextjs.org/)
+[![Solana](https://img.shields.io/badge/Solana-Web3.js-green.svg)](https://solana.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Solana Nexus is a high-performance, developer-first web dashboard designed to handle the next generation of Solana assets. Bypassing legacy command-line interfaces and fragmented external protocols, Nexus provides a native, protocol-first approach to Solana token lifecycle management, with first-class support for the Token-2022 standard.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Executive Summary
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Current decentralized applications often rely on outdated fetching patterns, persistent WebSockets, and external metadata bridges. Solana Nexus solves this by utilizing a strict feature-sliced architecture, TanStack Query for optimized RPC data caching, and native Token-2022 extensions for on-chain interactions. 
 
-## Learn More
+### Current Capabilities (Phase 2 Completed)
+* **Asset Command Center:** A read-only module that fetches and categorizes native SOL, standard SPL tokens, and Token-2022 assets.
+* **Optimized RPC Fetching:** Utilizes TanStack Query to manage data staleness and prevent RPC rate-limiting.
+* **Runtime Validation:** Strict environment variable validation using Zod prevents compilation if critical infrastructure (like RPC URLs) is missing.
+* **Production-Grade Tooling:** Husky pre-commit hooks, strict ESLint rules, and Prettier formatting ensure consistent code quality.
 
-To learn more about Next.js, take a look at the following resources:
+### Upcoming Modules
+* **The Token Forge:** Minting infrastructure utilizing the Token-2022 Metadata Pointer extension natively (bypassing Metaplex).
+* **Bulk Dispatcher:** Smart transaction batching algorithm for mass distribution (Airdrops) adhering to the 1232-byte MTU limit.
+* **Rent Reclaimer:** Automated scanning and closure of zero-balance Associated Token Accounts to reclaim rent lamports.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## System Architecture
 
-## Deploy on Vercel
+The repository follows a strict **Feature-Sliced Design (FSD)** pattern. Domain logic is isolated from global UI components to ensure maintainability as the application scales.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```text
+src/
+├── app/                    # Next.js App Router (Layouts, Pages)
+├── env/                    # Zod schema for strict environment validation
+├── features/               # Domain-specific logic
+│   └── asset-manager/      # Balances, ledger, token classification
+│       ├── api/            # Pure Solana RPC interaction functions
+│       ├── components/     # Domain-specific UI (Dashboard, Skeletons)
+│       ├── hooks/          # TanStack Query wrappers
+│       └── types.ts        # Strict TypeScript interfaces
+├── lib/                    # Third-party initializations (WalletProvider, QueryClient)
+└── shared/                 # Universal components (Buttons) and utilities
