@@ -4,10 +4,6 @@
 
 **A Unified Utility Framework for the Token-2022 Era**
 
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
-[![Next.js](https://img.shields.io/badge/Next.js-15+-black.svg)](https://nextjs.org/)
-[![Solana](https://img.shields.io/badge/Solana-Web3.js-green.svg)](https://solana.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Solana Nexus is a high-performance, developer-first web dashboard designed to handle the next generation of Solana assets. Bypassing legacy command-line interfaces and fragmented external protocols, Nexus provides a native, protocol-first approach to Solana token lifecycle management, with first-class support for the Token-2022 standard.
 
