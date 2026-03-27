@@ -1,3 +1,5 @@
+
+````markdown
 # Solana Nexus
 
 **A Unified Utility Framework for the Token-2022 Era**
@@ -44,3 +46,89 @@ src/
 │       └── types.ts        # Strict TypeScript interfaces
 ├── lib/                    # Third-party initializations (WalletProvider, QueryClient)
 └── shared/                 # Universal components (Buttons) and utilities
+````
+
+-----
+
+## Tech Stack
+
+  * **Framework:** Next.js 15 (App Router)
+  * **Language:** TypeScript (Strict Mode)
+  * **Blockchain:** `@solana/web3.js`, `@solana/spl-token`, `@solana/wallet-adapter`
+  * **State Management:** TanStack Query (React Query)
+  * **Styling:** Tailwind CSS
+  * **Animation:** Framer Motion, GSAP, Lenis (Prepared for UI micro-interactions)
+  * **Validation:** Zod
+
+-----
+
+## Getting Started
+
+### Prerequisites
+
+  * Node.js 18.17.0 or later
+  * npm, yarn, or pnpm
+  * A Solana wallet extension (Phantom, Solflare, etc.)
+
+### Installation
+
+1.  **Clone the repository:**
+
+    ```bash
+    git clone [https://github.com/your-org/solana-nexus.git](https://github.com/your-org/solana-nexus.git)
+    cd solana-nexus
+    ```
+
+2.  **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+3.  **Configure Environment Variables:**
+    Copy the example environment file and populate it with your preferred RPC endpoint.
+
+    ```bash
+    cp .env.example .env.local
+    ```
+
+    *Note: The application will fail to compile if `NEXT_PUBLIC_SOLANA_RPC_URL` is not provided, enforced by the internal Zod schema.*
+
+4.  **Initialize Git Hooks:**
+
+    ```bash
+    npm run prepare
+    ```
+
+5.  **Start the Development Server:**
+
+    ```bash
+    npm run dev
+    ```
+
+Navigate to `http://localhost:3000` to interact with the Asset Command Center.
+
+-----
+
+## Development Workflow
+
+This project enforces strict code quality gates.
+
+  * **Pre-commit Hooks:** Husky and `lint-staged` will automatically run ESLint and Prettier on staged files. Commits will be rejected if linting fails.
+  * **Pure Functions:** All Solana RPC interactions must be written as pure functions in the `api/` directory before being consumed by React hooks.
+  * **Type Safety:** The use of implicit `any` is strictly prohibited. All on-chain data structures must be mapped to TypeScript interfaces.
+
+-----
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](https://www.google.com/search?q=LICENSE) file for details.
+
+```
+
+***
+
+This document serves as a professional anchor for the project. It clearly communicates the architectural decisions and sets the standard for anyone viewing the repository. 
+
+Would you like to move into Phase 3 and begin architecting the `Token Forge` module, specifically focusing on calculating the required account space for Token-2022 metadata?
+```
