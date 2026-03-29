@@ -7,7 +7,7 @@ import {
 } from "@solana/wallet-adapter-react";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { env } from "@/env/schema";
+import { env } from "@/env/schema";3
 
 // Import the default styles for the wallet modal
 import "@solana/wallet-adapter-react-ui/styles.css";
