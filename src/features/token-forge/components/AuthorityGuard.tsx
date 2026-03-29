@@ -8,7 +8,6 @@ import { useRevokeAuthority } from "../hooks/useRevokeAuthority";
 export function AuthorityGuard() {
   const { connected } = useWallet();
   const revokeMutation = useRevokeAuthority();
-
   const [mintAddress, setMintAddress] = useState("");
   const [authType, setAuthType] = useState<AuthorityType>(
     AuthorityType.MintTokens,
@@ -17,12 +16,9 @@ export function AuthorityGuard() {
   const handleRevoke = (e: React.FormEvent) => {
     e.preventDefault();
     if (!mintAddress.trim()) return;
-
-    // A secondary browser confirmation for safety
     const isConfirmed = window.confirm(
-      "WARNING: This action is mathematically irreversible. You will permanently lose this authority. Proceed?",
+      "[CRITICAL WARNING] This action is mathematically irreversible. Proceed?",
     );
-
     if (isConfirmed) {
       revokeMutation.mutate({ mintAddress, authorityType: authType });
     }
@@ -31,72 +27,60 @@ export function AuthorityGuard() {
   if (!connected) return null;
 
   return (
-    <div className="w-full max-w-xl rounded-xl border border-red-900/30 bg-red-950/10 p-6 backdrop-blur-sm mt-8">
-      <div className="mb-6 border-b border-red-900/30 pb-4">
-        <h2 className="text-lg font-bold tracking-tight text-red-400">
-          Authority Guard (Danger Zone)
+    <div className="mt-8 w-full border border-red-900/50 bg-[#0a0000] p-6 font-mono">
+      <div className="mb-6 flex items-center justify-between pb-4">
+        <h2 className="text-[10px] font-bold uppercase tracking-widest text-red-500">
+          Authority Override (Danger)
         </h2>
-        <p className="mt-1 text-sm text-red-300/70">
-          Permanently revoke token authorities to establish community trust.
-          This cannot be undone.
-        </p>
+        <span className="text-[10px] uppercase text-red-900">Irreversible</span>
       </div>
 
-      <form onSubmit={handleRevoke} className="space-y-5">
-        <div className="space-y-1">
-          <label className="text-xs font-medium uppercase text-red-400/80">
-            Target Mint Address
+      <form onSubmit={handleRevoke} className="space-y-6">
+        <div className="space-y-2">
+          <label className="text-[10px] font-bold uppercase tracking-widest text-red-500/70">
+            Target Mint
           </label>
           <input
             type="text"
             value={mintAddress}
             onChange={(e) => setMintAddress(e.target.value)}
-            placeholder="Paste Token-2022 Mint Address"
-            className="w-full rounded-md border border-red-900/50 bg-slate-950 px-3 py-2 text-sm text-white placeholder-slate-600 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 transition-colors"
+            placeholder="Address..."
+            className="w-full border border-black-900/50 bg-black px-4 py-3 text-sm text-white placeholder-zinc-800 transition-colors focus:border-red-500 focus:outline-none"
           />
         </div>
 
-        <div className="space-y-1">
-          <label className="text-xs font-medium uppercase text-red-400/80">
-            Authority to Revoke
+        <div className="space-y-2">
+          <label className="text-[10px] font-bold uppercase tracking-widest text-red-500/70">
+            Protocol
           </label>
           <select
             value={authType}
             onChange={(e) =>
               setAuthType(Number(e.target.value) as AuthorityType)
             }
-            className="w-full rounded-md border border-red-900/50 bg-slate-950 px-3 py-2 text-sm text-white focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 transition-colors"
+            className="w-full border border-black-900/50 bg-black px-4 py-3 text-sm text-white transition-colors focus:border-red-500 focus:outline-none"
           >
             <option value={AuthorityType.MintTokens}>
-              Mint Authority (Lock Supply)
+              Burn Mint Authority (Lock Supply)
             </option>
             <option value={AuthorityType.FreezeAccount}>
-              Freeze Authority (Prevent Blacklisting)
+              Burn Freeze Authority
             </option>
           </select>
         </div>
 
         {revokeMutation.isError && (
-          <div className="rounded bg-red-900/40 p-3 text-sm text-red-200 border border-red-800">
-            {revokeMutation.error.message}
-          </div>
-        )}
-
-        {revokeMutation.isSuccess && (
-          <div className="rounded bg-orange-900/40 p-3 text-sm text-orange-200 border border-orange-800">
-            Authority permanently revoked. Signature:{" "}
-            {revokeMutation.data.slice(0, 8)}...
+          <div className="border border-red-800 bg-black-950/20 p-4 text-xs uppercase text-red-400">
+            [ERR] {revokeMutation.error.message}
           </div>
         )}
 
         <button
           type="submit"
           disabled={revokeMutation.isPending || !mintAddress}
-          className="w-full rounded-md bg-red-900/80 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-red-800 disabled:bg-slate-800 disabled:text-slate-500 border border-red-700"
+          className="w-full border border-red-900 bg-transparent px-4 py-4 text-xs font-bold uppercase tracking-widest text-red-500 transition-all hover:bg-red-950 hover:text-red-400 disabled:border-zinc-900 disabled:text-zinc-700"
         >
-          {revokeMutation.isPending
-            ? "Revoking..."
-            : "Permanently Revoke Authority"}
+          {revokeMutation.isPending ? "Revoking..." : "Initiate Burn"}
         </button>
       </form>
     </div>

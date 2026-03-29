@@ -13,24 +13,25 @@ export function TopNav() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-800 bg-slate-950/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-zinc-900 bg-black font-mono">
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-12">
+          {/* Terminal-style Logo */}
           <span className="text-xl font-bold tracking-tighter text-white">
-            NEXUS<span className="text-purple-500">.</span>
+            NEXUS<span className="animate-pulse text-[#14F195]">_</span>
           </span>
 
-          <nav className="hidden space-x-1 sm:flex">
+          <nav className="hidden space-x-8 sm:flex">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                  className={`text-[11px] font-bold uppercase tracking-widest transition-colors ${
                     isActive
-                      ? "bg-slate-800 text-white"
-                      : "text-slate-400 hover:bg-slate-900 hover:text-white"
+                      ? "text-[#14F195]"
+                      : "text-zinc-500 hover:text-white"
                   }`}
                 >
                   {link.name}

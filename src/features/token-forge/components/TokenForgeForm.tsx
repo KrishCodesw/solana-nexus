@@ -18,128 +18,122 @@ export function TokenForgeForm() {
     formState: { errors },
   } = useForm<TokenMintInput>({
     resolver: zodResolver(TokenMintSchema),
-    defaultValues: {
-      decimals: 9, // Standard for Solana
-    },
+    defaultValues: { decimals: 9 },
   });
 
   const onSubmit = (data: TokenMintInput) => {
     mintMutation.mutate(data, {
-      onSuccess: () => {
-        reset(); // Clear the form on success
-      },
+      onSuccess: () => reset(),
     });
   };
 
   if (!connected) {
     return (
-      <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-6 text-center text-slate-400">
-        Connect your wallet to access the Token Forge.
+      <div className="flex min-h-[200px] w-full items-center justify-center border border-zinc-800 bg-black p-6 font-mono">
+        <div className="text-center">
+          <div className="mb-4 inline-block border border-zinc-800 bg-zinc-950 px-4 py-2 text-xs uppercase tracking-widest text-zinc-500">
+            Forge Locked
+          </div>
+          <p className="text-sm text-zinc-400">
+            Connection required to initialize.
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="w-full max-w-xl rounded-xl border border-slate-800 bg-slate-900/80 p-6 backdrop-blur-sm">
-      <div className="mb-6 border-b border-slate-800 pb-4">
-        <h2 className="text-lg font-bold tracking-tight text-white">
-          Native Token-2022 Mint
+    <div className="w-full border border-zinc-800 bg-black p-6 font-mono transition-colors hover:border-zinc-700">
+      <div className="mb-8 flex items-center justify-between border-b border-zinc-900 pb-4">
+        <h2 className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
+          T-2022 Native Initialization
         </h2>
-        <p className="mt-1 text-sm text-slate-400">
-          Deploy a token with native metadata. No external protocols required.
-        </p>
+        <span className="h-2 w-2 animate-pulse rounded-full bg-[#14F195] shadow-[0_0_10px_rgba(20,241,149,0.5)]" />
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-        <div className="grid grid-cols-2 gap-4">
-          {/* Name Input */}
-          <div className="space-y-1">
-            <label className="text-xs font-medium uppercase text-slate-400">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <div className="grid grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
               Token Name
             </label>
             <input
               {...register("name")}
-              placeholder="e.g. Nexus Coin"
-              className="w-full rounded-md border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white placeholder-slate-600 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors"
+              placeholder="e.g. Nexus Core"
+              className="w-full border border-zinc-800 bg-zinc-950 px-4 py-3 text-sm text-white placeholder-zinc-700 transition-colors focus:border-[#14F195] focus:outline-none"
             />
             {errors.name && (
-              <span className="text-xs text-red-400">
+              <span className="text-xs text-red-500">
                 {errors.name.message}
               </span>
             )}
           </div>
 
-          {/* Symbol Input */}
-          <div className="space-y-1">
-            <label className="text-xs font-medium uppercase text-slate-400">
+          <div className="space-y-2">
+            <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
               Symbol
             </label>
             <input
               {...register("symbol")}
               placeholder="e.g. NEX"
-              className="w-full rounded-md border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white placeholder-slate-600 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors"
+              className="w-full border border-zinc-800 bg-zinc-950 px-4 py-3 text-sm text-white placeholder-zinc-700 transition-colors focus:border-[#14F195] focus:outline-none"
             />
             {errors.symbol && (
-              <span className="text-xs text-red-400">
+              <span className="text-xs text-red-500">
                 {errors.symbol.message}
               </span>
             )}
           </div>
         </div>
 
-        {/* URI Input */}
-        <div className="space-y-1">
-          <label className="text-xs font-medium uppercase text-slate-400">
+        <div className="space-y-2">
+          <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
             Metadata URI
           </label>
           <input
             {...register("uri")}
             placeholder="https://arweave.net/..."
-            className="w-full rounded-md border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white placeholder-slate-600 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors"
+            className="w-full border border-zinc-800 bg-zinc-950 px-4 py-3 text-sm text-white placeholder-zinc-700 transition-colors focus:border-[#14F195] focus:outline-none"
           />
           {errors.uri && (
-            <span className="text-xs text-red-400">{errors.uri.message}</span>
+            <span className="text-xs text-red-500">{errors.uri.message}</span>
           )}
         </div>
 
-        {/* Decimals Input */}
-        <div className="space-y-1">
-          <label className="text-xs font-medium uppercase text-slate-400">
+        <div className="space-y-2">
+          <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
             Decimals
           </label>
           <input
             type="number"
             {...register("decimals", { valueAsNumber: true })}
-            className="w-full rounded-md border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white placeholder-slate-600 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors"
+            className="w-full border border-zinc-800 bg-zinc-950 px-4 py-3 text-sm text-white transition-colors focus:border-[#14F195] focus:outline-none"
           />
           {errors.decimals && (
-            <span className="text-xs text-red-400">
+            <span className="text-xs text-red-500">
               {errors.decimals.message}
             </span>
           )}
         </div>
 
-        {/* Status Feedback */}
         {mintMutation.isError && (
-          <div className="rounded border border-red-900/50 bg-red-950/20 p-3 text-sm text-red-400">
-            {mintMutation.error.message}
+          <div className="border border-red-900/50 bg-[#0a0000] p-4 text-xs uppercase text-red-500">
+            [ERROR] {mintMutation.error.message}
           </div>
         )}
 
         {mintMutation.isSuccess && (
-          <div className="rounded border border-green-900/50 bg-green-950/20 p-3 text-sm text-green-400">
-            Success! Mint Address:{" "}
-            <span className="font-mono">{mintMutation.data.mintAddress}</span>
+          <div className="border border-[#14F195]/30 bg-[#14F195]/5 p-4 text-xs uppercase text-[#14F195]">
+            [SUCCESS] MINT CREATED: {mintMutation.data.mintAddress}
           </div>
         )}
 
-        {/* Submit Button */}
         <button
           type="submit"
           disabled={mintMutation.isPending}
-          className="w-full rounded-md bg-purple-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-purple-700 disabled:bg-slate-800 disabled:text-slate-500"
+          className="w-full border border-transparent bg-[#14F195] px-4 py-4 text-xs font-bold uppercase tracking-widest text-black transition-all hover:bg-[#00E1F0] disabled:border-zinc-800 disabled:bg-zinc-950 disabled:text-zinc-600"
         >
-          {mintMutation.isPending ? "Forging Token..." : "Forge Token"}
+          {mintMutation.isPending ? "Executing Sequence..." : "Execute Mint"}
         </button>
       </form>
     </div>
