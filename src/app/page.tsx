@@ -8,12 +8,9 @@ export default function Home() {
         {/* Header Section */}
         <header className="flex flex-col items-start justify-between gap-4 border-b border-slate-800 pb-8 sm:flex-row sm:items-center sm:gap-0">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-white">
+            <h1 className="text-3xl font-bold tracking-tight text-black">
               Solana Nexus
             </h1>
-            <p className="mt-1 text-sm text-slate-400">
-              Unified utility framework for Token-2022.
-            </p>
           </div>
           <WalletConnect />
         </header>

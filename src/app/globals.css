@@ -24,3 +24,56 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 1. The Main Button */
+.wallet-adapter-button-trigger {
+  @apply !bg-slate-900 !border !border-slate-800 !transition-all !duration-200 !ease-in-out !font-mono;
+}
+
+.wallet-adapter-button-trigger:hover {
+  @apply !bg-slate-800 !border-slate-700 !shadow-[0_0_15px_rgba(168,85,247,0.15)];
+}
+
+/* 2. The Dropdown Container */
+.wallet-adapter-dropdown {
+  @apply !font-sans;
+}
+
+/* 3. The Dropdown List (Menu) */
+.wallet-adapter-dropdown-list {
+  @apply !bg-slate-950 !border !border-slate-800 !rounded-xl !shadow-2xl !mt-2;
+}
+
+/* 4. Dropdown Items */
+.wallet-adapter-dropdown-list-item {
+  @apply !text-slate-300 !transition-colors !duration-150 !font-mono !text-sm;
+}
+
+.wallet-adapter-dropdown-list-item:hover {
+  @apply !bg-slate-900 !text-white;
+}
+
+/* 5. The Modal Overlay (When selecting a wallet) */
+.wallet-adapter-modal-wrapper {
+  @apply !bg-slate-950 !border !border-slate-800 !rounded-2xl !shadow-2xl;
+}
+
+.wallet-adapter-modal-title {
+  @apply !text-white !font-bold !tracking-tight;
+}
+
+.wallet-adapter-modal-button-close {
+  @apply !bg-slate-900 hover:!bg-slate-800 !transition-colors;
+}
+
+/* 6. Modal Wallet Options */
+.wallet-adapter-modal-list .wallet-adapter-button {
+  @apply !border !border-transparent hover:!border-slate-700 hover:!bg-slate-900/50 !transition-all;
+}
+
+.wallet-adapter-modal-list .wallet-adapter-button span {
+  @apply !text-slate-300;
+}
