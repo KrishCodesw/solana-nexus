@@ -30,7 +30,8 @@ export function useMintToken() {
 
       // 4. Send the transaction to the network
       const signature = await sendTransaction(transaction, connection, {
-        skipPreflight: false, // We want the RPC to simulate this before broadcasting
+        skipPreflight: false,
+        signers:[mintKeypair] // We want the RPC to simulate this before broadcasting
       });
 
       // 5. Await network confirmation
