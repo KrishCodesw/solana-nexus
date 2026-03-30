@@ -28,7 +28,8 @@ export function TopNav() {
             href="/"
             className="flex items-center text-xl font-bold tracking-tighter text-white"
           >
-            NEXUS<span className="animate-pulse text-[#14F195]">_</span>
+            <span className="animate-pulse text-[#14F195]">_</span> SOLANA NEXUS
+            <span className="animate-pulse text-[#14F195]">_</span>
           </Link>
 
           {/* Desktop Nav */}
