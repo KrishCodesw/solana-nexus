@@ -9,19 +9,20 @@ export const metadata = {
 
 export default function DispatchPage() {
   return (
-    <main className="min-h-screen bg-zinc-950 text-zinc-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto mb-8">
-        <h1 className="text-4xl font-bold tracking-tight text-white mb-4">
-          Token Dispatcher
-        </h1>
-        <p className="text-lg text-zinc-400">
-          Upload or paste a list of addresses to securely batch transfer SOL.
-          Transactions are automatically chunked to bypass network limits.
-        </p>
-      </div>
+    <main className="min-h-[calc(100vh-4rem)] bg-black px-6 py-8 sm:px-12 sm:py-12">
+      <div className="mx-auto max-w-5xl space-y-8">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tighter text-white sm:text-4xl">
+            Token Dispatcher
+          </h1>
+          <p className="mt-2 text-sm text-zinc-400 sm:text-base">
+            Upload or paste a list of addresses to securely batch transfer SOL.
+            Transactions are automatically chunked to bypass network limits.
+          </p>
+        </div>
 
-      {/* The core feature component */}
-      <BulkDispatcherDashboard />
+        <BulkDispatcherDashboard />
+      </div>
     </main>
   );
 }

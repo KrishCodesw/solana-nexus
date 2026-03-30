@@ -8,19 +8,21 @@ export const metadata = {
 
 export default function ReclaimPage() {
   return (
-    <main className="min-h-screen bg-zinc-950 text-zinc-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto mb-8">
-        <h1 className="text-4xl font-bold tracking-tight text-white mb-4">
-          Rent Reclaimer
-        </h1>
-        <p className="text-lg text-zinc-400">
-          Every token interaction creates an account that locks up a small
-          amount of SOL for storage rent. Use this tool to find empty accounts
-          and sweep that SOL back into your main wallet.
-        </p>
-      </div>
+    <main className="min-h-[calc(100vh-4rem)] bg-black px-6 py-8 sm:px-12 sm:py-12">
+      <div className="mx-auto max-w-5xl space-y-8">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tighter text-white sm:text-4xl">
+            Rent Reclaimer
+          </h1>
+          <p className="mt-2 text-sm text-zinc-400 sm:text-base">
+            Every token interaction creates an account that locks up a small
+            amount of SOL for storage rent. Use this tool to find empty accounts
+            and sweep that SOL back into your main wallet.
+          </p>
+        </div>
 
-      <ReclaimerDashboard />
+        <ReclaimerDashboard />
+      </div>
     </main>
   );
 }
